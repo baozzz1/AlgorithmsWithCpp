@@ -7,53 +7,54 @@ public:
 	CollisionSystem(const std::vector<Particle> &particles) :particles(particles) {}
 	~CollisionSystem() {}
 
+	void simulate(const double &limit, const double &Hz);
 
 private:
-	class Event	{
-	public:
-		Event(const double &t, const Particle &a, const Particle &b);
-		Event(const double & t, const Particle * pa, const Particle * pb);
-		const int compareTo(const Event & that) const;
-		const bool isValid();
-		~Event() {}
-
-	private:
-		const double time;
-		Particle a, b;
-		int countA, countB;
-	};
-
+	class Event;
 	std::priority_queue<Event> pq;
 	double t = 0.0;
 	std::vector<Particle> particles;
-
-	void predictCollisions(Particle &a, const double &limit);
+	void predictCollisions(Particle * const, const double &limit);
 };
 
-inline
-CollisionSystem::Event::Event(const double &t, const Particle *pa, const Particle *pb) :time(t), a(*pa), b(*pb) {
-	if (pa != nullptr) countA = pa->count;
+class CollisionSystem::Event{
+	friend class CollisionSystem;
+	public:
+		Event(const double&, Particle* const, Particle* const);
+		Event(const Event &one_event){
+			Event(one_event.time, one_event.a, one_event.b);
+		}
+		const bool isValid() const;
+		~Event() {}
+
+		bool operator<(const Event* const) const;
+		bool operator<(const Event &) const;
+		//Event &operator=(const Event &one_event) { *this = Event(one_event); return *this; }
+	private:
+		double time;
+		Particle *a, *b;
+		int countA, countB;
+};
+
+inline CollisionSystem::Event::Event(const double &t, Particle* const a, Particle* const b) :time(t), a(a), b(b){
+	if (a != nullptr) countA = a->count();
 	else countA = -1;
-	if (pb != nullptr) countB = pb->count;
+	if (b != nullptr) countB = b->count();
 	else countB = -1;
-
 }
 
-inline
-const int CollisionSystem::Event::compareTo(const Event &that) const {
-	if (this->time < that.time)
-		return -1;
-	else if (this->time > that.time)
-		return 1;
-	else
-		return 0;
-}
-
-inline
-const bool CollisionSystem::Event::isValid() {
-	if (a != nullptr && a.count() != countA)
+inline const bool CollisionSystem::Event::isValid() const {
+	if (a != nullptr && a->count() != countA)
 		return false;
-	if (b != nullptr && b.count() != countB)
+	if (b != nullptr && b->count() != countB)
 		return false;
 	return true;
+}
+
+inline bool CollisionSystem::Event::operator<(const Event * const that) const {
+	return this->time < that->time;
+}
+
+inline bool CollisionSystem::Event::operator<(const Event &that) const {
+	return this->time < that.time;
 }
