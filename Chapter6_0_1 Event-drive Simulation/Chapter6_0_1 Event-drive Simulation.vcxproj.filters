@@ -9,30 +9,24 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Source Files\6.0.1 事件驱动模拟">
-      <UniqueIdentifier>{984adb48-5e36-47a1-9c81-03bc7bcf06d0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\6.0.1 事件驱动模拟">
-      <UniqueIdentifier>{50c3e827-dcc8-4441-b4f3-ef9bfb93fecc}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CollisionSystem.h">
-      <Filter>Header Files\6.0.1 事件驱动模拟</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Particle.h">
-      <Filter>Header Files\6.0.1 事件驱动模拟</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CollisionSystem.cpp">
-      <Filter>Source Files\6.0.1 事件驱动模拟</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files\6.0.1 事件驱动模拟</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Particle.cpp">
-      <Filter>Source Files\6.0.1 事件驱动模拟</Filter>
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Chapter6_0_1_main.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

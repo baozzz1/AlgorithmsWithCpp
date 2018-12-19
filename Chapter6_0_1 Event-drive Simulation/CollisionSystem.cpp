@@ -74,7 +74,7 @@ void CollisionSystem::predictCollisions(Particle * const a, const double & limit
 			pq.push(Event(t + dt, a, &particles[i]));
 	}
 	double dtX = a->timeToHitVerticalWall();
-	if(t+dtX<=limit)
+	if (t + dtX <= limit)
 		pq.push(Event(t + dtX, a, NULL));
 	double dtY = a->timeToHitHorizontalWall();
 	if (t + dtY <= limit)
