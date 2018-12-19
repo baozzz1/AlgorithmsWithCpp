@@ -2,7 +2,8 @@
 #include"CollisionSystem.h"
 using namespace std;
 
-int main() {
+// Chapter6_0_1_main
+int Chapter6_0_1_main() {
 	int N;
 	cin >> N;
 	vector<Particle> particles(N);
